@@ -99,7 +99,67 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/2016/02/02/raghavan-post/">
+      <a href="/2016/02/11/logger-post/">
+        Python Application Directory Structure
+      </a>
+    </h1>
+
+    <span class="post-date">11 Feb 2016</span>
+
+    <p>One of the things that we need to get right for a python application is the way the project files are organized.</p>
+
+<p>A correct directory structure makes it easier for</p>
+<ul>
+  <li>importing modules within the project</li>
+  <li>logging messages in the logfile more meaningfully</li>
+  <li>packaging and installation</li>
+</ul>
+
+<p>This blog is about a directory structure that works well on the above counts.</p>
+
+<h2 id="project-structure">Project Structure</h2>
+
+<p>A project can consist of multiple python modules. Each module might have one or more python source files. A sample project for demonstrating the proposed directory structure is shown below as the output of <strong>tree</strong> command.</p>
+
+<p><img src="/images/dir.png" alt="hi" class="inline" /></p>
+
+<p>The project contains the following directories and files</p>
+
+<ul>
+  <li>The sources of the project are under a directory <em>my_proj</em>. Incidentally <em>my_proj</em> is also a module.</li>
+  <li>There are 2 modules <em>m1</em> and <em>m2</em> within <em>my_proj</em> that contain a source file each.</li>
+  <li>A <em>setup.py</em> that helps create a pip installable package is at the root of directory tree</li>
+  <li>A script <em>my_app</em> residing at the root of directory tree. <em>my_app</em> comes up in the PATH of the user after pip install for starting the application.</li>
+</ul>
+
+<p>The <a href="https://github.com/raghavan97/projdir/blob/master/my_proj/main.py">main.py</a> provides the main entry point for the project. It initializes the <em>root</em> logger. It also has a few log messages to demonstrate the logging at different levels. It calls a function in module m1. The directory structure helps the importing of function in any of the modules using project name, module name and source file name as follows</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">my_proj.m1.m1_src</span> <span class="kn">import</span> <span class="n">m1f</span></code></pre></figure>
+
+<p>The <a href="https://github.com/raghavan97/projdir/blob/master/my_proj/m1/m1_src.py">m1-src.py</a> shows how we can change the logging level in any of the source file and log messages. There is a call to a function <em>m2f</em> from a different module <em>m2</em> by using the import statement as explained above.</p>
+
+<p>In <a href="https://github.com/raghavan97/projdir/blob/master/myapp">myapp</a> , we have a script to start the application. Observe that it does not have an extension in the file name. It merely imports the main entry point from <em>my_proj/main</em>  and invokes it. The import statement follows the same convention as explained above.</p>
+
+<p>In <a href="https://github.com/raghavan97/projdir/blob/master/setup.py">setup.py</a> we specify <em>my_app</em> as the script that starts the application. After the package is pip installed <em>my_app</em> comes up in the PATH and can be used to start the application. In setup.py , we also specify all the packages in the project <em>my_proj</em>, <em>my_proj.m1</em> and <em>my_proj.m2</em></p>
+
+<h2 id="build-install-and-execute">Build, Install and Execute</h2>
+
+<p>Here is how we build the package, install it and run the app.</p>
+
+<p><img src="/images/packaging.png" alt="hi" class="inline" /></p>
+
+<p>The log messages indicate the time, severity, and also the origin of the message in terms of the source file and line number as follows</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="mi">2017</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">14</span> <span class="mo">07</span><span class="p">:</span><span class="mo">05</span><span class="p">:</span><span class="mi">42</span><span class="p">,</span><span class="mi">091</span><span class="p">:</span><span class="n">CRITICAL</span><span class="p">:</span><span class="n">my_proj</span><span class="o">.</span><span class="n">m1</span><span class="o">.</span><span class="n">m1_src</span><span class="p">:</span><span class="mi">8</span><span class="p">:[</span><span class="n">message</span> <span class="n">content</span><span class="p">]</span></code></pre></figure>
+
+<p>The source file, <em>my_proj.m1.m1_src</em> is indicated in the regular python dotted notation of module and source file. The line number <em>8</em> is the next field in the log message.</p>
+
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2016/02/02/property-post/">
         Property in Python Class
       </a>
     </h1>
@@ -132,7 +192,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">cust_id</span><span class="p">,</span> <span class="n">balance</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cust_id</span> <span class="o">=</span> <span class="n">cust_id</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">=</span> <span class="n">balance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">balance</span>
 
 
 <span class="n">c1</span> <span class="o">=</span> <span class="n">BankCustomer</span><span class="p">(</span><span class="s">'Amit'</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">10000</span><span class="p">)</span>

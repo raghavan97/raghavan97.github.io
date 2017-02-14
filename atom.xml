@@ -4,7 +4,7 @@
  <title>Lanyon</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2017-02-04T21:11:53+05:30</updated>
+ <updated>2017-02-14T20:49:07+05:30</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
@@ -13,10 +13,66 @@
 
  
  <entry>
+   <title>Python Application Directory Structure</title>
+   <link href="http://localhost:4000/2016/02/11/logger-post/"/>
+   <updated>2016-02-11T00:00:00+05:30</updated>
+   <id>http://localhost:4000/2016/02/11/logger-post</id>
+   <content type="html">&lt;p&gt;One of the things that we need to get right for a python application is the way the project files are organized.&lt;/p&gt;
+
+&lt;p&gt;A correct directory structure makes it easier for&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;importing modules within the project&lt;/li&gt;
+  &lt;li&gt;logging messages in the logfile more meaningfully&lt;/li&gt;
+  &lt;li&gt;packaging and installation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This blog is about a directory structure that works well on the above counts.&lt;/p&gt;
+
+&lt;h2 id=&quot;project-structure&quot;&gt;Project Structure&lt;/h2&gt;
+
+&lt;p&gt;A project can consist of multiple python modules. Each module might have one or more python source files. A sample project for demonstrating the proposed directory structure is shown below as the output of &lt;strong&gt;tree&lt;/strong&gt; command.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/dir.png&quot; alt=&quot;hi&quot; class=&quot;inline&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The project contains the following directories and files&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The sources of the project are under a directory &lt;em&gt;my_proj&lt;/em&gt;. Incidentally &lt;em&gt;my_proj&lt;/em&gt; is also a module.&lt;/li&gt;
+  &lt;li&gt;There are 2 modules &lt;em&gt;m1&lt;/em&gt; and &lt;em&gt;m2&lt;/em&gt; within &lt;em&gt;my_proj&lt;/em&gt; that contain a source file each.&lt;/li&gt;
+  &lt;li&gt;A &lt;em&gt;setup.py&lt;/em&gt; that helps create a pip installable package is at the root of directory tree&lt;/li&gt;
+  &lt;li&gt;A script &lt;em&gt;my_app&lt;/em&gt; residing at the root of directory tree. &lt;em&gt;my_app&lt;/em&gt; comes up in the PATH of the user after pip install for starting the application.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://github.com/raghavan97/projdir/blob/master/my_proj/main.py&quot;&gt;main.py&lt;/a&gt; provides the main entry point for the project. It initializes the &lt;em&gt;root&lt;/em&gt; logger. It also has a few log messages to demonstrate the logging at different levels. It calls a function in module m1. The directory structure helps the importing of function in any of the modules using project name, module name and source file name as follows&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;my_proj.m1.m1_src&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;m1f&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://github.com/raghavan97/projdir/blob/master/my_proj/m1/m1_src.py&quot;&gt;m1-src.py&lt;/a&gt; shows how we can change the logging level in any of the source file and log messages. There is a call to a function &lt;em&gt;m2f&lt;/em&gt; from a different module &lt;em&gt;m2&lt;/em&gt; by using the import statement as explained above.&lt;/p&gt;
+
+&lt;p&gt;In &lt;a href=&quot;https://github.com/raghavan97/projdir/blob/master/myapp&quot;&gt;myapp&lt;/a&gt; , we have a script to start the application. Observe that it does not have an extension in the file name. It merely imports the main entry point from &lt;em&gt;my_proj/main&lt;/em&gt;  and invokes it. The import statement follows the same convention as explained above.&lt;/p&gt;
+
+&lt;p&gt;In &lt;a href=&quot;https://github.com/raghavan97/projdir/blob/master/setup.py&quot;&gt;setup.py&lt;/a&gt; we specify &lt;em&gt;my_app&lt;/em&gt; as the script that starts the application. After the package is pip installed &lt;em&gt;my_app&lt;/em&gt; comes up in the PATH and can be used to start the application. In setup.py , we also specify all the packages in the project &lt;em&gt;my_proj&lt;/em&gt;, &lt;em&gt;my_proj.m1&lt;/em&gt; and &lt;em&gt;my_proj.m2&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;build-install-and-execute&quot;&gt;Build, Install and Execute&lt;/h2&gt;
+
+&lt;p&gt;Here is how we build the package, install it and run the app.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/packaging.png&quot; alt=&quot;hi&quot; class=&quot;inline&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The log messages indicate the time, severity, and also the origin of the message in terms of the source file and line number as follows&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;mi&quot;&gt;2017&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;02&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt; &lt;span class=&quot;mo&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;05&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;42&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;091&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CRITICAL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;my_proj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m1_src&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;message&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The source file, &lt;em&gt;my_proj.m1.m1_src&lt;/em&gt; is indicated in the regular python dotted notation of module and source file. The line number &lt;em&gt;8&lt;/em&gt; is the next field in the log message.&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
    <title>Property in Python Class</title>
-   <link href="http://localhost:4000/2016/02/02/raghavan-post/"/>
+   <link href="http://localhost:4000/2016/02/02/property-post/"/>
    <updated>2016-02-02T00:00:00+05:30</updated>
-   <id>http://localhost:4000/2016/02/02/raghavan-post</id>
+   <id>http://localhost:4000/2016/02/02/property-post</id>
    <content type="html">&lt;p&gt;Recently we came across an interesting issue in our python project.&lt;/p&gt;
 
 &lt;p&gt;A class was instantiated with a particular value given to a instance variable. A few user actions later, an unexpected value of the instance variable was found. The symptoms ended there.&lt;/p&gt;
@@ -43,7 +99,7 @@
     &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cust_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;balance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
         &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;
         &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cust_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cust_id&lt;/span&gt;
-        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_balance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;balance&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;balance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;balance&lt;/span&gt;
 
 
 &lt;span class=&quot;n&quot;&gt;c1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BankCustomer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Amit'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
