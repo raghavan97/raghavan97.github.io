@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Lanyon</title>
- <link href="http://lanyon.getpoole.com/atom.xml" rel="self"/>
- <link href="http://lanyon.getpoole.com/"/>
- <updated>2017-02-18T00:33:47+05:30</updated>
- <id>http://lanyon.getpoole.com</id>
+ <link href="http://localhost:4000/atom.xml" rel="self"/>
+ <link href="http://localhost:4000/"/>
+ <updated>2017-02-18T09:00:56+05:30</updated>
+ <id>http://localhost:4000</id>
  <author>
    <name>Mark Otto</name>
    <email>markdotto@gmail.com</email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>Python Application Directory Structure</title>
-   <link href="http://lanyon.getpoole.com/2016/02/11/logger-post/"/>
+   <link href="http://localhost:4000/2016/02/11/logger-post/"/>
    <updated>2016-02-11T00:00:00+05:30</updated>
-   <id>http://lanyon.getpoole.com/2016/02/11/logger-post</id>
+   <id>http://localhost:4000/2016/02/11/logger-post</id>
    <content type="html">&lt;p&gt;One of the things that we need to get right for a python application is the way the project files are organized.&lt;/p&gt;
 
 &lt;p&gt;A correct directory structure makes it easier for&lt;/p&gt;
@@ -70,9 +70,9 @@
  
  <entry>
    <title>Property in Python Class</title>
-   <link href="http://lanyon.getpoole.com/2016/02/02/property-post/"/>
+   <link href="http://localhost:4000/2016/02/02/property-post/"/>
    <updated>2016-02-02T00:00:00+05:30</updated>
-   <id>http://lanyon.getpoole.com/2016/02/02/property-post</id>
+   <id>http://localhost:4000/2016/02/02/property-post</id>
    <content type="html">&lt;p&gt;Recently we came across an interesting issue in our python project.&lt;/p&gt;
 
 &lt;p&gt;A class was instantiated with a particular value given to a instance variable. A few user actions later, an unexpected value of the instance variable was found. The symptoms ended there.&lt;/p&gt;
