@@ -46,6 +46,10 @@
   <nav class="sidebar-nav">
 
     
+       <a class="sidebar-nav-item" href="/2017/07/01/logging-post/">
+                  Python Logging </a>
+
+    
        <a class="sidebar-nav-item" href="/2016/02/11/logger-post/">
                   Python Application Directory Structure </a>
 
@@ -79,6 +83,57 @@
 
       <div class="container content">
         <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2017/07/01/logging-post/">
+        Python Logging
+      </a>
+    </h1>
+
+    <span class="post-date">01 Jul 2017</span>
+
+    <p>Python`s logging module is very versatile and very helpful for debugging issues in Software.This article examines some of the basic concepts of logging.</p>
+
+<h2 id="source-code-organization">Source Code Organization</h2>
+
+<p>There are 3 modules in the source code <a href="https://github.com/raghavan97/python_programs/blob/master/logging_example/module1" target="_blank">module1</a>, <a href="https://github.com/raghavan97/python_programs/blob/master/logging_example/module2" target="_blank">module2</a>, <a href="https://github.com/raghavan97/python_programs/blob/master/logging_example/module3" target="_blank">module3</a> . In main.py, we call functions from module1, module2. This would prove some of the concepts in logging module.</p>
+
+<p><img src="/images/logging-tree.png" alt="hi" class="inline" /></p>
+
+<h2 id="concepts">Concepts</h2>
+
+<p>The root logger is configured by using logging.basicConfig call. We can specify the format of a log message and also the logging level. This configuration is done only once in the code. It is mandated to call basicConfig() before you make the first call using the logger.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">format_string</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s">'</span><span class="si">%(asctime)</span><span class="s">s:</span><span class="si">%(name)</span><span class="s">s:</span><span class="si">%(levelname)</span><span class="s">s:'</span>
+    <span class="s">'</span><span class="si">%(filename)</span><span class="s">s:</span><span class="si">%(lineno)</span><span class="s">d:</span><span class="si">%(funcName)</span><span class="s">s:</span><span class="si">%(module)</span><span class="s">s:</span><span class="si">%(message)</span><span class="s">s'</span>
+<span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="n">format_string</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span></code></pre></figure>
+
+<p>After the root logger is configured , all the loggers would use the same format and logging level by default.</p>
+
+<p>When you want to debug a module you might want to increase the logging level for that module. This is done by configuring the logger of that module. This is applicable only to that module.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span></code></pre></figure>
+
+<p>The <a href="https://github.com/raghavan97/python_programs/blob/master/logging_example/module3/main.py" target="_blank">main.py</a> provides the main entry point for the project. It initializes the <em>root</em> logger. It also has a few log messages to demonstrate the logging at different levels. It calls a function f1 in module m1 and a function f2 from m2.</p>
+
+<h2 id="program-execution-and-output">Program Execution and Output</h2>
+
+<p>The log messages indicate the time, severity, and also the origin of the message in terms of the source file and line number as follows</p>
+
+<p><img src="/images/logging-messages.png" alt="hi" class="inline" /></p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="mi">2017</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mo">01</span> <span class="mi">15</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span><span class="mi">929</span><span class="p">:</span><span class="n">module1</span><span class="o">.</span><span class="n">m1</span><span class="p">:</span><span class="n">CRITICAL</span><span class="p">:</span><span class="n">m1</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">9</span><span class="p">:</span><span class="n">f1</span><span class="p">:</span><span class="n">m1</span><span class="p">:</span><span class="n">This</span> <span class="ow">is</span> <span class="n">CRITICAL</span> <span class="n">message</span> <span class="kn">from</span> <span class="nn">m1</span><span class="err">,</span><span class="nn">f1</span></code></pre></figure>
+
+
+  </div>
   
   <div class="post">
     <h1 class="post-title">
