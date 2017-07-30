@@ -95,7 +95,7 @@
 
 <h2 id="concepts">Concepts</h2>
 
-<p>The root logger is configured by using logging.basicConfig call. We can specify the format of a log message and also the logging level. This configuration is done only once in the code. It is mandated to call basicConfig() before you make the first call using the logger.</p>
+<p>The root logger is configured by using logging.basicConfig call. We can specify the format of a log message and also the logging level. This configuration is done only once in the code. It is mandated to call basicConfig() before you make the first call using the logger. Alternatively, you can have a handler for the root logger, if you need more control on the formatting aspects.</p>
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
 
@@ -117,6 +117,8 @@
 <p>The <a href="https://github.com/raghavan97/python_programs/blob/master/logging_example/module3/main.py" target="_blank">main.py</a> provides the main entry point for the project. It initializes the <em>root</em> logger. It also has a few log messages to demonstrate the logging at different levels. It calls a function f1 in module m1 and a function f2 from m2.</p>
 
 <h2 id="program-execution-and-output">Program Execution and Output</h2>
+
+<p>In this example, we initialize the root logger to display only CRITICAL messages. The module2 sets the logging level to DEBUG and hence we see messages of DEBUG , INFO, ERROR, WARNING from m2 alone. For module1 and module3, we only see CRITICAL messages, since the root logger is configured for displaying only CRITICAL.</p>
 
 <p>The log messages indicate the time, severity, and also the origin of the message in terms of the source file and line number as follows</p>
 

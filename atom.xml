@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Python</title>
- <link href="http://localhost:4000/atom.xml" rel="self"/>
- <link href="http://localhost:4000/"/>
- <updated>2017-07-01T23:12:18+05:30</updated>
- <id>http://localhost:4000</id>
+ <link href="http://lanyon.getpoole.com/atom.xml" rel="self"/>
+ <link href="http://lanyon.getpoole.com/"/>
+ <updated>2017-07-30T17:11:26+05:30</updated>
+ <id>http://lanyon.getpoole.com</id>
  <author>
    <name>Mark Otto</name>
    <email>markdotto@gmail.com</email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>Python Logging</title>
-   <link href="http://localhost:4000/2017/07/01/logging-post/"/>
+   <link href="http://lanyon.getpoole.com/2017/07/01/logging-post/"/>
    <updated>2017-07-01T00:00:00+05:30</updated>
-   <id>http://localhost:4000/2017/07/01/logging-post</id>
+   <id>http://lanyon.getpoole.com/2017/07/01/logging-post</id>
    <content type="html">&lt;p&gt;Python`s logging module is very versatile and very helpful for debugging issues in Software.This article examines some of the basic concepts of logging.&lt;/p&gt;
 
 &lt;h2 id=&quot;source-code-organization&quot;&gt;Source Code Organization&lt;/h2&gt;
@@ -27,7 +27,7 @@
 
 &lt;h2 id=&quot;concepts&quot;&gt;Concepts&lt;/h2&gt;
 
-&lt;p&gt;The root logger is configured by using logging.basicConfig call. We can specify the format of a log message and also the logging level. This configuration is done only once in the code. It is mandated to call basicConfig() before you make the first call using the logger.&lt;/p&gt;
+&lt;p&gt;The root logger is configured by using logging.basicConfig call. We can specify the format of a log message and also the logging level. This configuration is done only once in the code. It is mandated to call basicConfig() before you make the first call using the logger. Alternatively, you can have a handler for the root logger, if you need more control on the formatting aspects.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;logging&lt;/span&gt;
 
@@ -50,6 +50,8 @@
 
 &lt;h2 id=&quot;program-execution-and-output&quot;&gt;Program Execution and Output&lt;/h2&gt;
 
+&lt;p&gt;In this example, we initialize the root logger to display only CRITICAL messages. The module2 sets the logging level to DEBUG and hence we see messages of DEBUG , INFO, ERROR, WARNING from m2 alone. For module1 and module3, we only see CRITICAL messages, since the root logger is configured for displaying only CRITICAL.&lt;/p&gt;
+
 &lt;p&gt;The log messages indicate the time, severity, and also the origin of the message in terms of the source file and line number as follows&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/logging-messages.png&quot; alt=&quot;hi&quot; class=&quot;inline&quot; /&gt;&lt;/p&gt;
@@ -61,9 +63,9 @@
  
  <entry>
    <title>Python Application Directory Structure</title>
-   <link href="http://localhost:4000/2016/02/11/logger-post/"/>
+   <link href="http://lanyon.getpoole.com/2016/02/11/logger-post/"/>
    <updated>2016-02-11T00:00:00+05:30</updated>
-   <id>http://localhost:4000/2016/02/11/logger-post</id>
+   <id>http://lanyon.getpoole.com/2016/02/11/logger-post</id>
    <content type="html">&lt;p&gt;One of the things that we need to get right for a python application is the way the project files are organized.&lt;/p&gt;
 
 &lt;p&gt;A correct directory structure makes it easier for&lt;/p&gt;
@@ -117,9 +119,9 @@
  
  <entry>
    <title>Property in Python Class</title>
-   <link href="http://localhost:4000/2016/02/02/property-post/"/>
+   <link href="http://lanyon.getpoole.com/2016/02/02/property-post/"/>
    <updated>2016-02-02T00:00:00+05:30</updated>
-   <id>http://localhost:4000/2016/02/02/property-post</id>
+   <id>http://lanyon.getpoole.com/2016/02/02/property-post</id>
    <content type="html">&lt;p&gt;Recently we came across an interesting issue in our python project.&lt;/p&gt;
 
 &lt;p&gt;A class was instantiated with a particular value given to a instance variable. A few user actions later, an unexpected value of the instance variable was found. The symptoms ended there.&lt;/p&gt;
