@@ -63,7 +63,7 @@
 
   <div class="sidebar-item">
     <p>
-      &copy; 2017. All rights reserved.
+      &copy; 2018. All rights reserved.
     </p>
   </div>
 </div>
@@ -145,11 +145,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">cust_id</span> <span class="o">=</span> <span class="n">cust_id</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">=</span> <span class="n">balance</span>
 
-    <span class="nd">@property</span>
+    <span class="o">@</span><span class="nb">property</span>
     <span class="k">def</span> <span class="nf">balance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span>
 
-    <span class="nd">@balance.setter</span>
+    <span class="o">@</span><span class="n">balance</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">balance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">==</span> <span class="mi">5000</span><span class="p">:</span>
             <span class="p">(</span>
@@ -162,7 +162,7 @@
             <span class="p">)</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">stack</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">code</span> <span class="o">=</span> <span class="n">source_code</span><span class="p">[</span><span class="n">source_index</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="s">'assigned at {}:{} code="{}"'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="s">'assigned at {}:{} code="{}"'</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span>
                     <span class="n">filename</span><span class="p">,</span><span class="n">line_num</span><span class="p">,</span> <span class="n">code</span>
                 <span class="p">)</span>
             <span class="p">)</span>

@@ -63,7 +63,7 @@
 
   <div class="sidebar-item">
     <p>
-      &copy; 2017. All rights reserved.
+      &copy; 2018. All rights reserved.
     </p>
   </div>
 </div>
@@ -95,7 +95,7 @@
 
 <h2 id="concepts">Concepts</h2>
 
-<p>The root logger is configured by using logging.basicConfig call. We can specify the format of a log message and also the logging level. This configuration is done only once in the code. It is mandated to call basicConfig() before you make the first call using the logger. Alternatively, you can have a handler for the root logger, if you need more control on the formatting aspects.</p>
+<p>The root logger is configured by using logging.basicConfig call. We can specify the format of a log message and also the logging level. This configuration is done only once in the code. It is mandated to call basicConfig() before you make the first call using the logger.</p>
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
 
@@ -103,7 +103,7 @@
     <span class="s">'</span><span class="si">%(asctime)</span><span class="s">s:</span><span class="si">%(name)</span><span class="s">s:</span><span class="si">%(levelname)</span><span class="s">s:'</span>
     <span class="s">'</span><span class="si">%(filename)</span><span class="s">s:</span><span class="si">%(lineno)</span><span class="s">d:</span><span class="si">%(funcName)</span><span class="s">s:</span><span class="si">%(module)</span><span class="s">s:</span><span class="si">%(message)</span><span class="s">s'</span>
 <span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="n">format_string</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span></code></pre></figure>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="n">format_string</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span></code></pre></figure>
 
 <p>After the root logger is configured , all the loggers would use the same format and logging level by default.</p>
 
@@ -118,13 +118,11 @@
 
 <h2 id="program-execution-and-output">Program Execution and Output</h2>
 
-<p>In this example, we initialize the root logger to display only CRITICAL messages. The module2 sets the logging level to DEBUG and hence we see messages of DEBUG , INFO, ERROR, WARNING from m2 alone. For module1 and module3, we only see CRITICAL messages, since the root logger is configured for displaying only CRITICAL.</p>
-
 <p>The log messages indicate the time, severity, and also the origin of the message in terms of the source file and line number as follows</p>
 
 <p><img src="/images/logging-messages.png" alt="hi" class="inline" /></p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="mi">2017</span><span class="o">-</span><span class="mo">07</span><span class="o">-</span><span class="mo">01</span> <span class="mi">15</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span><span class="mi">929</span><span class="p">:</span><span class="n">module1</span><span class="o">.</span><span class="n">m1</span><span class="p">:</span><span class="n">CRITICAL</span><span class="p">:</span><span class="n">m1</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">9</span><span class="p">:</span><span class="n">f1</span><span class="p">:</span><span class="n">m1</span><span class="p">:</span><span class="n">This</span> <span class="ow">is</span> <span class="n">CRITICAL</span> <span class="n">message</span> <span class="kn">from</span> <span class="nn">m1</span><span class="err">,</span><span class="nn">f1</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="mi">2017</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span> <span class="mi">15</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span><span class="mi">929</span><span class="p">:</span><span class="n">module1</span><span class="o">.</span><span class="n">m1</span><span class="p">:</span><span class="n">CRITICAL</span><span class="p">:</span><span class="n">m1</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">9</span><span class="p">:</span><span class="n">f1</span><span class="p">:</span><span class="n">m1</span><span class="p">:</span><span class="n">This</span> <span class="ow">is</span> <span class="n">CRITICAL</span> <span class="n">message</span> <span class="k">from</span> <span class="n">m1</span><span class="p">,</span><span class="n">f1</span></code></pre></figure>
 
 
 </div>
