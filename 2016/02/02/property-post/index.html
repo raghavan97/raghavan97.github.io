@@ -46,6 +46,10 @@
   <nav class="sidebar-nav">
 
     
+       <a class="sidebar-nav-item" href="/2018/11/01/binary-dist-post/">
+                  Binary distributing a python package </a>
+
+    
        <a class="sidebar-nav-item" href="/2017/07/01/logging-post/">
                   Python Logging </a>
 
@@ -137,46 +141,7 @@
 
 <p>The following shows the modified code for solving the issue.</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">inspect</span>
-
-<span class="k">class</span> <span class="nc">BankCustomer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">cust_id</span><span class="p">,</span> <span class="n">balance</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cust_id</span> <span class="o">=</span> <span class="n">cust_id</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">=</span> <span class="n">balance</span>
-
-    <span class="o">@</span><span class="nb">property</span>
-    <span class="k">def</span> <span class="nf">balance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span>
-
-    <span class="o">@</span><span class="n">balance</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">balance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">==</span> <span class="mi">5000</span><span class="p">:</span>
-            <span class="p">(</span>
-                <span class="n">frame</span><span class="p">,</span>
-                <span class="n">filename</span><span class="p">,</span>
-                <span class="n">line_num</span><span class="p">,</span> 
-                <span class="n">func</span><span class="p">,</span> 
-                <span class="n">source_code</span><span class="p">,</span>
-                <span class="n">source_index</span>
-            <span class="p">)</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">stack</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="n">code</span> <span class="o">=</span> <span class="n">source_code</span><span class="p">[</span><span class="n">source_index</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="s">'assigned at {}:{} code="{}"'</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span>
-                    <span class="n">filename</span><span class="p">,</span><span class="n">line_num</span><span class="p">,</span> <span class="n">code</span>
-                <span class="p">)</span>
-            <span class="p">)</span>
-            <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">=</span> <span class="n">value</span>
-
-
-<span class="n">c1</span> <span class="o">=</span> <span class="n">BankCustomer</span><span class="p">(</span><span class="s">'Amit'</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">10000</span><span class="p">)</span>
-<span class="n">c1</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="mi">8000</span>
-<span class="n">c1</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="mi">3000</span>
-<span class="n">c1</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="mi">5000</span>
-<span class="n">c1</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="mi">15000</span>
-<span class="n">c1</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="mi">25000</span>
-<span class="n">c1</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="mi">65000</span></code></pre></figure>
+<script src="https://gist.github.com/raghavan97/a750f606401a354299b13538c29737fa.js"></script>
 
 <p>We run the example. We can see a print that identifies the culprit. The print shows the <em>next executable statement</em> after the unacceptable assignment.</p>
 
@@ -188,7 +153,7 @@
   </nav>
   <h3 class="title">Terminal</h3>
   <pre>
-<span class="command">python example.py</span>
+<span class="command">python try.py</span>
 <span class="output">assigned at try.py:38 code=&quot;c1.balance = 15000&quot;</span>
   </pre>
 </div>
@@ -198,6 +163,15 @@
 <div class="related">
   <h2>Related Posts</h2>
   <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2018/11/01/binary-dist-post/">
+            Binary distributing a python package
+            <small>01 Nov 2018</small>
+          </a>
+        </h3>
+      </li>
     
       <li>
         <h3>
